@@ -10,5 +10,13 @@
 .boardSquare {
     border: 1px solid black;
     font-size: 100px;
+    text-align: center;
 }
 
+#infoContainer {
+    display: flex;
+}
+
+.playerName {
+    padding: 15px;
+}
