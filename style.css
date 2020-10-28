@@ -1,5 +1,10 @@
+body {
+    text-align: center;
+}
+
 #gameBoard {
     display: grid;
+    margin: auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     border: 1px solid black;
@@ -13,8 +18,10 @@
     text-align: center;
 }
 
-#infoContainer {
+#playerContainer, #infoContainer, #buttonContainer {
     display: flex;
+    margin: 10px;
+    justify-content: center;
 }
 
 .playerName {
