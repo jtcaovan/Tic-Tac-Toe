@@ -1,5 +1,12 @@
 body {
+    background-color: #1d3557;
     text-align: center;
+}
+
+h1{
+    font-size: 50px;
+    margin: 20px;
+    color: #e63946
 }
 
 #gameBoard {
@@ -13,17 +20,76 @@ body {
 }
 
 .boardSquare {
-    border: 1px solid black;
+    border: 1px solid #f1faee;
+    color: #e63946;
     font-size: 100px;
     text-align: center;
 }
 
-#playerContainer, #infoContainer, #buttonContainer {
+.boardSquare:hover {
+    background-color: #457b9d;
+}
+
+.button {
+    background-color: #457b9d;
+    border: 1px solid #457b9d;
+    width: 130px;
+    font-size: 20px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    color: #f1faee;
+}
+
+#resetButton {
+    margin: 10px;
+    display: none;
+}
+
+#startButton:hover, #resetButton:hover {
+    background-color: #e63946;
+    border: 1px solid #e63946;
+}
+
+#modalContainer {
+    font-size: 22px;
+    background-color: #f1faee;
+    border: 3px solid #e63946;
+    padding: 50px;
+    width: 50%;
+}
+
+.container {
     display: flex;
     margin: 10px;
     justify-content: center;
+    color: #a8dadc;
+    font-size: 22px;
+}
+
+#infoContainer {
+    display: none;
+
+}
+
+#playerOne, #playerTwo {
+    font-size: 20px;
+    width: 120px;
+    text-align: center;
+    background-color: #457b9d;
+    border: none;
+    border-radius: 10px;
+    color: #f1faee;
+    padding: 5px;
+    margin: 5px;
 }
 
 .playerName {
+    margin: 0;
     padding: 15px;
+}
+
+#resultModal {
+    display: none;
+    
 }

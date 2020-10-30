@@ -12,21 +12,28 @@
 <body>
     <h1>Tic-Tac-Toe</h1>
 
-    <div id="playerContainer">
-      <form>
-        <label for="playerOne">Player One (X): </label>
-        <input type="text" id="playerOne" name="playerOne">
+    <div id="playerContainer" class="container">
+        <form>
+          <label for="playerOne">Player One (X): </label>
+          <input type="text" id="playerOne" name="playerOne">
+          <label for="playerTwo">Player Two (O): </label>
+          <input type="text" id="playerTwo" name="playerTwo">
+        </form>
 
-        <label for="playerTwo">Player Two (O): </label>
-        <input type="text" id="playerTwo" name="playerTwo">
-      </form>
-
-      <button id="startButton">Start Game</button>
+        <button id="startButton" class="button">Start Game</button>
     </div>
-    <button id="resetButton">Reset Game</button>
 
-    <div id="infoContainer"></div>
-    
+    <div id="infoContainer" class="container">
+      <p id='playerOneName' class="playerName"></p>
+      <p id='playerTwoName' class="playerName"></p>
+      <p id="whoseTurn" class="playerName"></p>
+    </div>
+
+    <div id="resultModal">
+      <p></p>
+      <button id="resetButton" class="button">Start Over</button>
+    </div>
+
     <div id="gameBoard">
         <div class="boardSquare"></div>
         <div class="boardSquare"></div>
@@ -38,6 +45,7 @@
         <div class="boardSquare"></div>
         <div class="boardSquare"></div>
     </div>
+
   <script src="script.js"></script>
 </body>
 
