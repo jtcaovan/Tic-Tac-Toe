@@ -55,10 +55,6 @@ const game = (() => {
         whoseTurn.textContent = `It is ${turn}'s turn!`
     }
 
-    const displayWinner = () => {
-
-    }
-
     const randomizeFirstTurn = (playerOne,playerTwo) => {
         let turn = Math.floor(Math.random() * 2)
         if (turn === 0) {
@@ -77,7 +73,9 @@ const gameBoard = (() => {
     // Populate Board and selected moves
     let boardSquare = document.querySelectorAll('.boardSquare');
     let resultModal = document.querySelector('#resultModal')
-    let board = ['','','','','','','','','',]
+    let resultText = document.querySelector('#resultText')
+    let board = ['','','','','','','','','']
+    let spacesTaken = [];
 
     const displayBoard = () => {
         for (let i = 0; i< board.length; i++) {
@@ -93,54 +91,75 @@ const gameBoard = (() => {
     }
 
     const addLetter = (playerOne,playerTwo,turn) => {
+        let playerOneName = playerOne.getName();
+        let playerTwoName = playerTwo.getName();
+
         for (i=0; i<boardSquare.length; i++) {
             boardSquare[i].index = i;
             boardSquare[i].addEventListener('click', (e) => {
                 if (e.target.textContent !== '') {
-                    alert('Spot is taken!')
+                    e.target.classList.add("shake-horizontal")
                 } else {
-                    if (turn === playerOne.getName()) {
+                    if (turn === playerOneName) {
                         e.target.textContent = playerOne.getLetter();
                         board.splice(e.target.index, 1, playerOne.getLetter())
-                        turn = playerTwo.getName();
+                        spacesTaken.push(playerOne.getLetter())
+                        turn = playerTwoName;
                     } else {
                         e.target.textContent = playerTwo.getLetter();
                         board.splice(e.target.index, 1, playerTwo.getLetter())
-                        turn = playerOne.getName();
+                        spacesTaken.push(playerTwo.getLetter())
+                        turn = playerOneName;
                     }
                     game.displayTurn(turn);
-                    checkForWin();
-                    // checkForTie();
+                    checkForWin(playerOneName,playerTwoName);
                 }
             })
         }
     }
 
-    const checkForWin = () => {
-        if (
-            // horizontal
-            board[6] === board[7] && board[6] === board[8] && board[6] !== '' ||
-            board[3] === board[4] && board[3] === board[5] && board[3] !== '' ||
-            board[0] === board[1] && board[0] === board[2] && board[0] !== '' ||
-            // vertical 
-            board[7] === board[4] && board[7] === board[1] && board[7] !== '' ||
-            board[8] === board[5] && board[8] === board[2] && board[8] !== '' ||
-            board[6] === board[3] && board[6] === board[0] && board[6] !== '' ||
-            // diag
-            board[6] === board[4] && board[6] === board[2] && board[6] !== '' ||
-            board[0] === board[4] && board[0] === board[8] && board[0] !== '') {
-                infoContainer.style.display = 'none';
-                resultModal.style.display = 'block';
-                // displayWinner();
-                alert("Win")
+    const checkForWin = (playerOneName,playerTwoName) => {
+        let winner = null
+
+        if (winRequirement(board[6],board[7],board[8])) {winner = board[6]}
+        if (winRequirement(board[3],board[4],board[5])) {winner = board[3]}
+        if (winRequirement(board[0],board[1],board[2])) {winner = board[0]}
+
+        if (winRequirement(board[7],board[4],board[1])) {winner = board[7]}
+        if (winRequirement(board[8],board[5],board[2])) {winner = board[8]}
+        if (winRequirement(board[6],board[3],board[0])) {winner = board[6]}
+
+        if (winRequirement(board[6],board[4],board[2])) {winner = board[6]}
+        if (winRequirement(board[0],board[4],board[8])) {winner = board[0]}
+
+        if (winner) {
+            displayWinner(winner,playerOneName,playerTwoName);
+        } else if (spacesTaken.length === 9 && winner === null) {
+            displayTie();
         }
     }
+
+    const displayWinner = (winner, playerOne, playerTwo) => {
+        infoContainer.style.display = 'none';
+        resultModal.style.display = 'block';
+        if (winner === 'X') {
+            resultText.textContent = `${playerOne} wins!`
+        } else if (winner === 'O') {
+            resultText.textContent = `${playerTwo} wins!`
+        }
+    }
+
+    const displayTie = () => {
+        infoContainer.style.display = 'none';
+        resultModal.style.display = 'block';
+        resultText.textContent = `It's a tie!`
+    }
+
+    const winRequirement = (a,b,c) => {
+        return a === b && a === c && a !== '';
+    }
     
-    // const checkForTie = () => {
-    //     if (board[i])
-    // }
- 
     displayBoard();
 
-    return {displayBoard, addLetter, resetBoard, checkForWin};
+    return {displayBoard, addLetter, resetBoard};
 })();
