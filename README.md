@@ -7,3 +7,6 @@ Practiced with factory function and module design
 Future Updates
 1) Add option to play against computer
 2) Restart animation when occupied square is clicked
+
+Live Demo:
+https://jtcaovan.github.io/Tic-Tac-Toe/
